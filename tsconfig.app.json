@@ -13,7 +13,8 @@
       "node",
       "jest",
       "@testing-library/jest-dom",
-      "vitest"
+      "vitest",
+      "cypress"
     ],
     /* Bundler mode */
     "moduleResolution": "Bundler",

@@ -134,7 +134,7 @@ export const ClientForm = () => {
 					required
 				/>
 				<SearchIconContainer onClick={handleSearchLocation}>
-					<SearchIcon aria-label="Search Icon" role="img" />
+					<SearchIcon aria-label="Search Icon" role="img" data-cy="search" />
 				</SearchIconContainer>
 
 				{suggestions.length > 0 && (
@@ -144,6 +144,7 @@ export const ClientForm = () => {
 								key={index}
 								onClick={() => handleSuggestionClick(suggestion)}
 								style={{ padding: '8px', cursor: 'pointer' }}
+								data-cy={`suggestion-item-${index}`}
 							>
 								{suggestion}
 							</SuggestionItem>
