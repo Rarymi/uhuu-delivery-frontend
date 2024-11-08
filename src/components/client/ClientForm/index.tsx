@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useClientContext } from '../../../context/ClientContext';
-import { getGeolocation } from '../../../services/geolocation';
+import { getAddressSuggestions, getGeolocation } from '../../../services/geolocation';
 import { Client } from '../../../types/Client';
-import axios from 'axios';
 import {
 	FormActionsContainer,
 	FormContainer,
@@ -39,18 +38,9 @@ export const ClientForm = () => {
 		setError(null);
 
 		try {
-			const response = await axios.get(
-				'https://nominatim.openstreetmap.org/search',
-				{
-					params: {
-						q: formData.address,
-						format: 'json',
-						addressdetails: 1,
-						limit: 5,
-					},
-				},
-			);
-			const filteredSuggestions = response.data.map(
+			const response = await getAddressSuggestions(formData.address);
+
+			const filteredSuggestions = response.map(
 				(item: { address: Address }) => {
 					const { road, city, country, town } = item.address;
 					return `${road || ''}, ${city || ''}, ${town || ''},${country || ''}`.replace(
